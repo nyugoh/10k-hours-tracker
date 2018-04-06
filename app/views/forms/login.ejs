@@ -1,0 +1,17 @@
+<%- include('../header.ejs') %>
+<div class="ui container">
+  <%- include('../menu.ejs') %>
+  <form action="/login" method="post" class="ui form">
+    <div class="header">Login Form</div>
+      <div class="field required">
+        <label>Email/Username</label>
+        <input name="email" required placeholder="Email/ username..." type="text">
+      </div>
+      <div class="field required">
+        <label>Password</label>
+        <input required name="password" placeholder="Password here ..." type="password">
+      </div>
+      <div class="ui submit button">SIGN IN</div>
+  </form>
+</div>
+<%- include('../footer.ejs') %>

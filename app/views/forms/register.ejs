@@ -1,0 +1,22 @@
+<%- include('../header.ejs') %>
+<div class="ui container">
+  <%- include('../menu.ejs') %>
+  <form action="/register" method="post" class="ui form">
+    <div class="header">Register</div>
+    <div class="field required">
+      <label>Username</label>
+      <input required name="username" placeholder="Username..." type="text">
+    </div>
+    <div class="field required">
+      <label>Email</label>
+      <input name="email" placeholder="Email/ username..." type="text">
+    </div>
+    <div class="field required">
+      <label>Password</label>
+      <input required name="password" placeholder="Password here ..." type="password">
+    </div>
+    <div class="ui submit button">SIGN UP</div>
+  </form>
+
+</div>
+<%- include('../footer.ejs') %>
