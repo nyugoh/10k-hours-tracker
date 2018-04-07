@@ -1,20 +1,52 @@
 <div class="ui standard modal" id="addSkillModal">
   <i class="close icon"></i>
   <div class="header">Add a new exciting skill</div>
-  <div action="/skills/add" method="post" class="ui form padded">
-    <div class="field required">
-      <input name="email" required placeholder="Email/username..." type="text">
-    </div>
-    <div class="field required">
-      <input required name="password" placeholder="Password here ..." type="password">
-    </div>
+  <div class="ui padded">
+    <form id="addSkillForm" method="post" class="ui form segment">
+      <div class="field">
+        <div class="ui labeled input">
+          <a class="ui label">Subject</a>
+          <input type="text" id="title" name="subject" required placeholder="Skill title...">
+        </div>
+      </div>
+      <div class="field">
+        <div class="ui hidden divider"></div>
+        <div class="ui labeled input">
+          <a class="ui label">Days</a>
+          <input type="text" id="days" name="hours" required placeholder="Days to learn...">
+        </div>
+      </div>
+      <div class="field">
+        <div class="ui hidden divider"></div>
+        <div class="ui labeled input">
+          <a class="ui label">Color</a>
+          <input type="color" id="color" name="theme" required placeholder="Theme color...">
+        </div>
+      </div>
+      <div class="field">
+        <div class="ui hidden divider"></div>
+        <label>Specific goals</label>
+        <textarea name="goals" id="goals" placeholder="Enter goals in point form, separated by commas i.e
+-Learn to C++,
+-Learn to Java,
+-Learn to C#,"></textarea>
+      </div>
+      <div class="ui hidden divider"></div>
+      <div class="field left aligned">
+        <button name="submit" type="submit" class="ui positive right labeled icon button">
+          Add <i class="add icon"></i>
+        </button>
+      </div>
+      <div id="successMessage"></div>
+      <div id="errorMessage"></div>
+    </form>
   </div>
   <div class="actions">
     <button type="reset" class="ui black button">
       Cancel
     </button>
-    <button type="submit" class="ui positive right labeled icon button">
-      Add <i class="add icon"></i>
+    <button type="reset" class="ui blue button">
+      Reset
     </button>
   </div>
 </div>

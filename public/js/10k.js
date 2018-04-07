@@ -2,7 +2,7 @@
 * Main javascript file
  */
 $(document).ready(() =>{
-  $('#addSkillModal').modal('attach events', '#addSkill');
+  $('#addSkillModal').modal('attach events', '#addSkillButton');
 
   $('#basic.progress').progress({
     label   : false,
@@ -37,7 +37,6 @@ function populateSkills(skills) {
   let table = $('#skillsTable');
   if (skills.length > 0){
     skills.map((skill) =>{
-      console.log(skill);
       let subject = skill.subject.toUpperCase();
       let lastActivity = new Date(skill.updatedAt);
       let milestones;
@@ -46,10 +45,10 @@ function populateSkills(skills) {
       } else {
         milestones = 'NONE';
       }
-      table.append('<tr id="'+skill._id+'">\n' +
-        '            <td>'+subject+'</td>\n' +
-        '            <td>'+lastActivity.toLocaleDateString() + lastActivity.toLocaleTimeString() +'</td>\n' +
-        '            <td>\n' +
+      table.append('<tr id="'+skill._id+'" style="color:'+skill.theme+'">\n' +
+        '            <td class="center aligned">'+subject+'</td>\n' +
+        '            <td class="center aligned">'+lastActivity.toLocaleDateString() + ' '+ lastActivity.toLocaleTimeString() +'</td>\n' +
+        '            <td class="center aligned">\n' +
         '              <div class="ui basic progress success" data-percent="52">\n' +
         '                <div class="bar" style="transition-duration: 300ms; width: 52%;">\n' +
         '                  <div class="progress"></div>\n' +
@@ -57,23 +56,18 @@ function populateSkills(skills) {
         '                <div class="label">52% Complete</div>\n' +
         '              </div>\n' +
         '            </td>\n' +
-        '            <td>'+skill.hours+' hours</td>\n' +
-        '            <td>\n' +
+        '            <td class="center aligned">'+skill.hours+' hours</td>\n' +
+        '            <td class="center aligned">\n' +
         '              <ul class="ui list" style="list-style: none;">\n' +
                         milestones+
         '              </ul>\n' +
         '            </td>\n' +
-        '            <td class="text center">\n' +
+        '            <td class="center aligned">\n' +
         '              <i onclick="removeSkill(\''+skill._id+'\');" class="icon trash red"></i>\n' +
         '              <div class="ui hidden divider"></div>\n' +
         '              <i class="icon pencil blue"></i>\n' +
         '              <div class="ui hidden divider"></div>\n' +
-        '              <div class="field">\n' +
-        '                <div class="ui slider checkbox">\n' +
-        '                  <input name="top-posts" type="checkbox" tabindex="0" class="hidden">\n' +
-        '                  <label>Complete</label>\n' +
-        '                </div>\n' +
-        '              </div>\n' +
+
         '            </td>\n' +
         '          </tr>')
     });
@@ -97,7 +91,7 @@ function addSkill(e) {
     method: 'post',
     url: '/skills/add',
     data: skill,
-    success: (data, status, message) =>{
+    success: (data) =>{
       if(data.status) {
         $("#addSkillForm").get(0).reset();
         $('#successMessage').html('<div class="ui hidden divider"></div>\n' +
@@ -112,7 +106,7 @@ function addSkill(e) {
       $('#errorMessage').html('<div class="ui hidden divider"></div>\n' +
         '  <div class="ui message error">\n' +
         '    <div class="header">Error... !!</div>\n' +
-        '    <p>error.</p>\n' +
+        '    <p>'+error+'</p>\n' +
         '  </div>');
     }
   })

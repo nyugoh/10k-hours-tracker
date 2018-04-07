@@ -8,107 +8,33 @@
     <div class="column row">
       <div class="twelve column">
         <h3 class="header">Your skills</h3>
+        <i id="addSkillButton" onclick="" class="ui circular green icon add large"></i>
         <table class="ui celled striped table">
           <thead>
           <tr>
-            <th>Subject</th>
-            <th>Last Activity</th>
-            <th>
+            <th class="center aligned">Subject</th>
+            <th class="center aligned">Last Activity</th>
+            <th class="center aligned">
               Progress
               <i class="icon hourglass green"></i>
             </th>
-            <th>Hours</th>
-            <th>
+            <th class="center aligned">
+              Hours
+              <i class="icon clock"></i>
+            </th>
+            <th class="center aligned">
               <i class="icon trophy orange"></i>
               Milestones
             </th>
-            <th><i class="icon cogs blue"></i></th>
-          </tr></thead><tbody id="skillsTable">
-          <!--<tr>-->
-            <!--<td>C++</td>-->
-            <!--<td>30 hours ago</td>-->
-            <!--<td>-->
-              <!--<div class="ui basic progress success" data-percent="52">-->
-                <!--<div class="bar" style="transition-duration: 300ms; width: 52%;">-->
-                  <!--<div class="progress"></div>-->
-                <!--</div>-->
-                <!--<div class="label">52% Complete</div>-->
-              <!--</div>-->
-            <!--</td>-->
-            <!--<td class="right aligned collapsing">200 hours</td>-->
-            <!--<td>-->
-              <!--<ul class="ui list" style="list-style: none;">-->
-                <!--<li class="item">-->
-                  <!--<i class="icon checkmark"></i> Login with passport-->
-                <!--</li>-->
-                <!--<li class="item">-->
-                  <!--<i class="icon checkmark"></i> Login with OAth-->
-                <!--</li>-->
-              <!--</ul>-->
-            <!--</td>-->
-            <!--<td class="text center">-->
-              <!--<i class="icon trash red"></i>-->
-              <!--<div class="ui hidden divider"></div>-->
-              <!--<i class="icon pencil blue"></i>-->
-              <!--<div class="ui hidden divider"></div>-->
-              <!--<div class="field">-->
-                <!--<div class="ui slider checkbox">-->
-                  <!--<input name="top-posts" type="checkbox" tabindex="0" class="hidden">-->
-                  <!--<label>Complete</label>-->
-                <!--</div>-->
-              <!--</div>-->
-            <!--</td>-->
-          <!--</tr>-->
-          </tbody>
+            <th class="center aligned"><i class="icon cogs blue"></i></th>
+          </tr></thead>
+          <tbody id="skillsTable"></tbody>
         </table>
-      </div>
-    </div>
-    <div class="column row">
-      <div class="four column">
-        <h3 class="header">Add Skill</h3>
-        <form id="addSkillForm" method="post" class="ui form segment">
-          <div class="field">
-            <div class="ui hidden divider"></div>
-            <div class="ui labeled input">
-              <a class="ui label">Subject</a>
-              <input type="text" id="title" name="subject" required placeholder="Skill title...">
-            </div>
-          </div>
-          <div class="field">
-            <div class="ui hidden divider"></div>
-            <div class="ui labeled input">
-              <a class="ui label">Days</a>
-              <input type="text" id="days" name="hours" required placeholder="Days to learn...">
-            </div>
-          </div>
-          <div class="field">
-            <div class="ui hidden divider"></div>
-            <div class="ui labeled input">
-              <a class="ui label">Color</a>
-              <input type="color" id="color" name="theme" required placeholder="Theme color...">
-            </div>
-          </div>
-          <div class="field">
-            <div class="ui hidden divider"></div>
-            <label>Specific goals</label>
-            <textarea name="goals" id="goals" placeholder="Enter goals in point form, separated by commas i.e
--Learn to C++,
--Learn to Java,
--Learn to C#,"></textarea>
-          </div>
-          <div class="ui hidden divider"></div>
-          <div class="field clearing" style="">
-            <button name="submit" type="submit" class="ui positive right labeled icon button right floated">
-              Add <i class="add icon"></i>
-            </button>
-          </div>
-          <div id="successMessage"></div>
-          <div id="errorMessage"></div>
-        </form>
       </div>
     </div>
   </div>
 </div>
+<%- include('../forms/addSkill.ejs')%>
 <script>
   let skills = <%-JSON.stringify(skills)%>
   populateSkills(skills);
