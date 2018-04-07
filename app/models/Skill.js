@@ -10,6 +10,6 @@ const skillSchema = new mongoose.Schema({
   user: String,
   theme: String,
   goals: String
-}, { timestamp: true });
+}, { timestamps: true });
 
 module.exports = mongoose.model('Skill', skillSchema);

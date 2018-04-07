@@ -17,7 +17,7 @@ const userSchema = new schema({
   skills: {
     type: Array
   }
-}, { timestamp: true });
+}, { timestamps: true });
 
 module.exports = mongoose.model('User', userSchema);
 
