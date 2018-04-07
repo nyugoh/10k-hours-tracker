@@ -1,11 +1,12 @@
 <%- include('../header.ejs') %>
 <div class="ui container">
   <%- include('../menu.ejs') %>
+  <h3 class="header">Login Form</h3>
+  <hr>
   <form action="/signin" method="post" class="ui form">
-    <div class="header">Login Form</div>
       <div class="field required">
         <label>Email/Username</label>
-        <input name="email" required placeholder="Email/ username..." type="text">
+        <input name="email" required placeholder="Email/username..." type="text">
       </div>
       <div class="field required">
         <label>Password</label>
@@ -13,5 +14,11 @@
       </div>
       <button type="submit" class="ui submit button">SIGN IN</button>
   </form>
+  <%if(message.length > 0){%>
+  <div class="ui message error">
+    <div class="message header">Error</div>
+    <p><%=message%></p>
+  </div>
+  <%}%>
 </div>
 <%- include('../footer.ejs') %>

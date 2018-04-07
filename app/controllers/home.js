@@ -10,6 +10,7 @@ module.exports = (app) => {
   app.use('/', router);
 };
 
+// TODO:: ADDED A ROUTE AND PAGE TO MANAGE USERS
 const isLoggedIn = (req, res, next) =>{
   (!req.isAuthenticated())? res.redirect('/signin'): next();
 };
@@ -29,7 +30,7 @@ router.get('/signin', (req, res) =>{
   if(req.isAuthenticated())
     res.redirect('/');
   else
-    res.render('forms/login', {title: 'Login Page', user: req.user});
+    res.render('forms/login', {title: 'Login Page', user: req.user, message: req.flash('message')});
 });
 
 router.post('/signin', passport.authenticate('local-signin', {
@@ -44,10 +45,7 @@ router.get('/signout', (req, res) =>{
 });
 
 router.get('/signup', (req, res) =>{
-  if(req.isAuthenticated())
-    res.redirect('/');
-  else
-    res.render('forms/register', {title: 'Sign up', user: req.user});
+    res.render('forms/register', {title: 'Sign up', user: req.user, message: req.flash('message')});
 });
 
 router.post('/signup', passport.authenticate('local-signup', {
@@ -95,7 +93,7 @@ passport.use('local-signin', new LocalStrategy({
   User.findOne({email:email}, (error, user) =>{
     if (error) return done(error);
     if (!user) {
-      return done(null, false, req.flash({message: 'User/User doesn\t exist.'}));
+      return done(null, false, req.flash('message', 'User doesn\'t exist.'));
     } else {
       User.comparePassword(password, user.password, function(err, isMatch){
         if(err) throw err;
