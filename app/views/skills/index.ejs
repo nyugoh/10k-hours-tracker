@@ -3,46 +3,97 @@
   <%- include('../partials/menu.ejs')%>
   <h2>Skills</h2>
   <hr>
-  <h3>Add Skill</h3>
-  <div id="addSkillForm" class="ui form segment">
-    <div class="three fields">
-      <div class="field">
-        <div class="ui hidden divider"></div>
-        <div class="ui labeled input">
-          <a class="ui label">Subject</a>
-          <input type="text" required placeholder="Skill title...">
-        </div>
+  <div class="ui padded grid">
+    <div class="two column row">
+      <div class="ui hidden divider"></div>
+      <div class="twelve column">
+        <h3 class="header">Your skills</h3>
+        <table class="ui celled striped table">
+          <thead>
+          <tr><th colspan="3">
+              Files
+            </th>
+          </tr></thead><tbody>
+          <tr>
+            <td class="disabled">
+              <i class="folder icon"></i> folder
+            </td>
+            <td>Comment</td>
+            <td class="right aligned collapsing">10 hours ago</td>
+          </tr>
+          <tr>
+            <td>
+              <i class="folder icon"></i> folder2
+            </td>
+            <td>Comment</td>
+            <td class="right aligned">10 hours ago</td>
+          </tr>
+          <tr>
+            <td>
+              <i class="folder icon"></i> folder3
+            </td>
+            <td>Comment</td>
+            <td class="right aligned">10 hours ago</td>
+          </tr>
+          <tr>
+            <td class="collapsing">
+              <i class="file outline icon"></i> package.json
+            </td>
+            <td>Comment</td>
+            <td class="right aligned">10 hours ago</td>
+          </tr>
+          <tr>
+            <td>
+              <i class="file outline icon"></i> Gruntfile.js
+            </td>
+            <td>Comment</td>
+            <td class="right aligned">10 hours ago</td>
+          </tr>
+          </tbody>
+        </table>
       </div>
-      <div class="field">
-        <div class="ui hidden divider"></div>
-        <div class="ui labeled input">
-          <a class="ui label">Days</a>
-          <input type="text" required placeholder="Days to learn...">
-        </div>
-      </div>
-      <div class="field">
-        <div class="ui hidden divider"></div>
-        <div class="ui labeled input">
-          <a class="ui label">Color</a>
-          <input type="color" placeholder="Theme color...">
-        </div>
-      </div>
-    </div>
-    <div class="two fields">
-      <div class="field">
-        <div class="ui hidden divider"></div>
-        <label>Specific goals</label>
-        <textarea placeholder="Enter goals in point form, separated by commas i.e
+      <div class="four column">
+        <h3 class="header">Add Skill</h3>
+        <form id="addSkillForm" class="ui form segment">
+          <div class="field">
+            <div class="ui hidden divider"></div>
+            <div class="ui labeled input">
+              <a class="ui label">Subject</a>
+              <input type="text" id="title" name="subject" required placeholder="Skill title...">
+            </div>
+          </div>
+          <div class="field">
+            <div class="ui hidden divider"></div>
+            <div class="ui labeled input">
+              <a class="ui label">Days</a>
+              <input type="text" id="days" name="hours" required placeholder="Days to learn...">
+            </div>
+          </div>
+          <div class="field">
+            <div class="ui hidden divider"></div>
+            <div class="ui labeled input">
+              <a class="ui label">Color</a>
+              <input type="color" id="color" name="theme" required placeholder="Theme color...">
+            </div>
+          </div>
+          <div class="field">
+            <div class="ui hidden divider"></div>
+            <label>Specific goals</label>
+            <textarea name="goals" id="goals" placeholder="Enter goals in point form, separated by commas i.e
 -Learn to C++,
 -Learn to Java,
 -Learn to C#,"></textarea>
+          </div>
+          <div class="ui hidden divider"></div>
+          <div class="field clearing" style="">
+            <button name="submit" type="submit" class="ui positive right labeled icon button right floated">
+              Add <i class="add icon"></i>
+            </button>
+          </div>
+          <div id="successMessage"></div>
+          <div id="errorMessage"></div>
+        </form>
       </div>
-    </div>
-    <div class="ui hidden divider"></div>
-    <div class="field floated right">
-      <button type="submit" class="ui positive right labeled icon button">
-        Add <i class="add icon"></i>
-      </button>
     </div>
   </div>
 </div>

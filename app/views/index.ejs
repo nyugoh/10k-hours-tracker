@@ -1,6 +1,6 @@
-<% include header %>
+<%- include('./partials/header.ejs') %>
 <div class="ui container">
-  <% include menu %>
+  <%- include('./partials/menu') %>
 
   <h1><%-title %></h1>
   <p>Welcome to <%-appName%></p>
@@ -9,4 +9,4 @@
 
 </div>
 <%- include('./forms/addSkill.ejs') %>
-<% include footer %>
+<%- include('./partials/footer.ejs') %>
