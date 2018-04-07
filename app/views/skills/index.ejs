@@ -4,54 +4,66 @@
   <h2>Skills</h2>
   <hr>
   <div class="ui padded grid">
-    <div class="two column row">
-      <div class="ui hidden divider"></div>
+    <div class="ui hidden divider"></div>
+    <div class="column row">
       <div class="twelve column">
         <h3 class="header">Your skills</h3>
         <table class="ui celled striped table">
           <thead>
-          <tr><th colspan="3">
-              Files
+          <tr>
+            <th>Subject</th>
+            <th>Last Activity</th>
+            <th>
+              Progress
+              <i class="icon hourglass green"></i>
             </th>
-          </tr></thead><tbody>
+            <th>Hours Remaining</th>
+            <th>
+              <i class="icon trophy orange"></i>
+              Milestones achieved
+            </th>
+            <th><i class="icon cogs blue"></i></th>
+          </tr></thead><tbody id="skillsTable">
           <tr>
-            <td class="disabled">
-              <i class="folder icon"></i> folder
-            </td>
-            <td>Comment</td>
-            <td class="right aligned collapsing">10 hours ago</td>
-          </tr>
-          <tr>
+            <td>C++</td>
+            <td>30 hours ago</td>
             <td>
-              <i class="folder icon"></i> folder2
+              <div class="ui basic progress success" data-percent="52">
+                <div class="bar" style="transition-duration: 300ms; width: 52%;">
+                  <div class="progress"></div>
+                </div>
+                <div class="label">52% Complete</div>
+              </div>
             </td>
-            <td>Comment</td>
-            <td class="right aligned">10 hours ago</td>
-          </tr>
-          <tr>
+            <td class="right aligned collapsing">200 hours</td>
             <td>
-              <i class="folder icon"></i> folder3
+              <ul class="ui list" style="list-style: none;">
+                <li class="item">
+                  <i class="icon checkmark"></i> Login with passport
+                </li>
+                <li class="item">
+                  <i class="icon checkmark"></i> Login with OAth
+                </li>
+              </ul>
             </td>
-            <td>Comment</td>
-            <td class="right aligned">10 hours ago</td>
-          </tr>
-          <tr>
-            <td class="collapsing">
-              <i class="file outline icon"></i> package.json
+            <td class="text center">
+              <i class="icon trash red"></i>
+              <div class="ui hidden divider"></div>
+              <i class="icon pencil blue"></i>
+              <div class="ui hidden divider"></div>
+              <div class="field">
+                <div class="ui slider checkbox">
+                  <input name="top-posts" type="checkbox" tabindex="0" class="hidden">
+                  <label>Complete</label>
+                </div>
+              </div>
             </td>
-            <td>Comment</td>
-            <td class="right aligned">10 hours ago</td>
-          </tr>
-          <tr>
-            <td>
-              <i class="file outline icon"></i> Gruntfile.js
-            </td>
-            <td>Comment</td>
-            <td class="right aligned">10 hours ago</td>
           </tr>
           </tbody>
         </table>
       </div>
+    </div>
+    <div class="column row">
       <div class="four column">
         <h3 class="header">Add Skill</h3>
         <form id="addSkillForm" class="ui form segment">
@@ -97,5 +109,8 @@
     </div>
   </div>
 </div>
-
+<script>
+  let skills = <%-JSON.stringify(skills)%>
+  populateSkills(skills);
+</script>
 <%-include('../partials/footer.ejs')%>

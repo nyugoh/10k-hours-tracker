@@ -14,14 +14,17 @@ router.use('/*', (req, res, next) =>{
 });
 
 router.get('/', (req, res) =>{
-  res.render('skills/index', { title: 'Your skills', user: req.user});
+  Skill.find({user: req.user._id}).sort({'createdAt': -1}).then(skills=>{
+    res.render('skills/index', { title: 'Your skills', user: req.user, skills:skills});
+  }).catch(error=> {
+    res.status(404).json({message: error.message});
+  });
 });
 
 router.post('/add', (req, res) =>{
   if(req.body) {
     let newSkill = new Skill(req.body);
     newSkill.user = req.user._id;
-    console.log(newSkill);
     newSkill.save().then(skill =>{
       res.json({status: 'OK'});
     }).catch(error =>{
@@ -34,8 +37,8 @@ router.post('/add', (req, res) =>{
 
 router.get('/list', (req, res) =>{
   Skill.find({user: req.user._id}).sort({'createdAt': -1}).then(skills=>{
-    res.send({skills});
+    res.json({skills});
   }).catch(error=>{
     res.status(404).json({message: error.message});
   });
-})
+});
