@@ -45,8 +45,8 @@ function populateSkills(skills) {
       } else {
         milestones = 'NONE';
       }
-      table.append('<tr id="'+skill._id+'" style="color:'+skill.theme+'">\n' +
-        '            <td class="center aligned">'+subject+'</td>\n' +
+      table.append('<tr id="'+skill._id+'" style="color:'+skill.theme+';">\n' +
+        '            <td class="center aligned"><a href="/skills/'+subject.toLowerCase()+'" style="color:'+skill.theme+';">'+subject+'</a></td>\n' +
         '            <td class="center aligned">'+lastActivity.toLocaleDateString() + ' '+ lastActivity.toLocaleTimeString() +'</td>\n' +
         '            <td class="center aligned">\n' +
         '              <div class="ui basic progress success" data-percent="52">\n' +

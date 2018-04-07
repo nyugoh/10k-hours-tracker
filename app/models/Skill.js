@@ -4,7 +4,8 @@ const skillSchema = new mongoose.Schema({
   subject:{
     type: String,
     required: true,
-    unique: true
+    unique: true,
+    uppercase: true
   },
   hours: String,
   user: String,

@@ -1,0 +1,37 @@
+<%- include('../partials/header.ejs') %>
+<div class="ui container">
+  <%- include('../partials/menu.ejs')%>
+  <div class="ui hidden divider"></div>
+  <h2 id="subject"></h2>
+  <hr>
+  <div class="ui grid">
+    <div class="two column row">
+      <div class="ui two column">
+        <div class="ui column segment">
+          <h4 class="header">Click here to start counter</h4>
+          <button class="ui button green massive">
+            <i class="icon stopwatch"></i> START
+          </button>
+        </div>
+        <hr>
+        <div class="ui column segment">
+          <h4 class="header">Click here to stop counter</h4>
+          <button class="ui button massive orange" disabled>
+            <i class="icon hourglass"></i> STOP
+          </button>
+        </div>
+      </div>
+      <div class="ui column">
+        <div class="ui hidden divider"></div>
+        Progress bar here
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  let skill = <%-JSON.stringify(skill)%>
+  console.log(skill)
+  $('#subject').text(skill.subject);
+  $('#subject').css('color',skill.theme);
+</script>
+<%-include('../partials/footer.ejs')%>

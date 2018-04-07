@@ -51,3 +51,11 @@ router.post('/remove', (req, res) =>{
     res.status(404).json({message: error.message});
   });
 });
+
+router.get('/:skillSubject', (req, res, next) =>{
+  Skill.findOne({$or:[{subject: req.params.skillSubject.toLowerCase()}, {subject: req.params.skillSubject.toUpperCase()}]}).then(skill =>{
+    res.render('skills/skill', {title: skill.subject,user: req.user, skill});
+  }).catch(error =>{
+    next(error);
+  });
+});
