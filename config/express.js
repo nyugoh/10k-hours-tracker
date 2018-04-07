@@ -1,12 +1,13 @@
-const express = require('express');
-const glob = require('glob');
-
+import express from 'express';
+import glob from 'glob';
 const favicon = require('serve-favicon');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const compress = require('compression');
 const methodOverride = require('method-override');
+import passport from 'passport';
+import connectFlash from 'connect-flash';
 
 module.exports = (app, config) => {
   const env = process.env.NODE_ENV || 'development';
@@ -27,6 +28,10 @@ module.exports = (app, config) => {
   app.use(compress());
   app.use(express.static(config.root + '/public'));
   app.use(methodOverride());
+  app.use(require('express-session')({ secret: process.env.SESSIONKEY, resave: true, saveUninitialized: true }));
+  app.use(passport.initialize());
+  app.use(passport.session());
+  app.use(connectFlash());
 
   var controllers = glob.sync(config.root + '/app/controllers/*.js');
   controllers.forEach((controller) => {

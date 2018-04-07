@@ -14,6 +14,15 @@
         <a class="item">Spanish</a>
       </div>
     </div>
+    <%if(user){%>
+      <div class="item">
+        <div class="ui primary button">SignIn</div>
+      </div>
+    <%}else{%>
+      <div class="item">
+        <div class="ui primary button">SignOut</div>
+      </div>
+    <%}%>
     <div class="item">
       <div class="ui primary button">Add Skill</div>
     </div>
