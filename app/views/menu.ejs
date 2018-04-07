@@ -1,10 +1,6 @@
 <div class="ui large menu">
-  <a class="active item">
-    Home
-  </a>
-  <a class="item">
-    Progress
-  </a>
+  <a class="active item" href="/">Home</a>
+  <a class="item" href="/skills">Progress</a>
   <div class="right menu">
     <div class="ui dropdown item">
       Skills <i class="dropdown icon"></i>
@@ -14,13 +10,13 @@
         <a class="item">Spanish</a>
       </div>
     </div>
-    <%if(user){%>
+    <%if(!user){%>
       <div class="item">
-        <div class="ui primary button">SignIn</div>
+        <a href="/signin" class="ui primary button">SignIn</a>
       </div>
     <%}else{%>
       <div class="item">
-        <div class="ui primary button">SignOut</div>
+        <a href="/signout" class="ui primary button">SignOut</a>
       </div>
     <%}%>
     <div class="item">

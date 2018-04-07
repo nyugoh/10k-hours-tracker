@@ -11,35 +11,48 @@ module.exports = (app) => {
 };
 
 const isLoggedIn = (req, res, next) =>{
-  (!req.isAuthenticated())? res.redirect('/login'): next();
+  (!req.isAuthenticated())? res.redirect('/signin'): next();
 };
 router.get('/', isLoggedIn, (req, res, next) => {
   Article.find((err, articles) => {
     if (err) return next(err);
     res.render('index', {
       title: 'Generator-Express MVC',
-      articles: articles
+      articles: articles,
+      appName: process.env.APP_NAME,
+      user: req.user
     });
   });
 });
 
-router.get('/login', (req, res) =>{
-  res.render('forms/login', {title: 'Login Page'});
+router.get('/signin', (req, res) =>{
+  if(req.isAuthenticated())
+    res.redirect('/');
+  else
+    res.render('forms/login', {title: 'Login Page', user: req.user});
 });
 
-router.post('/login', passport.authenticate('local-signin', {
+router.post('/signin', passport.authenticate('local-signin', {
   successRedirect: '/',
-  failureRedirect: '/login',
+  failureRedirect: '/signin',
   failureFlash: true
 }));
 
-router.get('/register', (req, res) =>{
-  res.render('forms/register', {title: 'Sign up'});
+router.get('/signout', (req, res) =>{
+  req.logout();
+  res.redirect('/signin');
 });
 
-router.post('/register', passport.authenticate('local-signup', {
+router.get('/signup', (req, res) =>{
+  if(req.isAuthenticated())
+    res.redirect('/');
+  else
+    res.render('forms/register', {title: 'Sign up', user: req.user});
+});
+
+router.post('/signup', passport.authenticate('local-signup', {
   successRedirect: '/',
-  failureRedirect: '/register',
+  failureRedirect: '/signup',
   failureFlash: true
 }));
 
