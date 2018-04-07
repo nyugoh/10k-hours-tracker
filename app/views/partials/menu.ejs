@@ -1,6 +1,6 @@
 <div class="ui large menu">
   <a class="active item" href="/">Home</a>
-  <a class="item" href="/skills">Progress</a>
+  <a class="item" href="/skills">Skills</a>
   <div class="right menu">
     <div class="ui dropdown item">
       Skills <i class="dropdown icon"></i>
@@ -8,6 +8,15 @@
         <a class="item">English</a>
         <a class="item">Russian</a>
         <a class="item">Spanish</a>
+      </div>
+    </div>
+    <div class="ui dropdown item">
+      <div class="text">Today</div>
+      <i class="dropdown icon"></i>
+      <div class="menu" tabindex="-1">
+        <div class="item" data-text="today">Today</div>
+        <div class="item" data-text="this week">This Week</div>
+        <div class="item" data-text="this month">This Month</div>
       </div>
     </div>
     <%if(!user){%>
@@ -20,7 +29,7 @@
       </div>
     <%}%>
     <div class="item">
-      <div class="ui primary button">Add Skill</div>
+      <div class="ui primary button" id="addSkill" onclick="addSkill()">Add Skill</div>
     </div>
   </div>
 </div>

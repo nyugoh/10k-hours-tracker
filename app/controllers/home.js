@@ -14,7 +14,8 @@ module.exports = (app) => {
 const isLoggedIn = (req, res, next) =>{
   (!req.isAuthenticated())? res.redirect('/signin'): next();
 };
-router.get('/', isLoggedIn, (req, res, next) => {
+// TODO:: Return login middleware
+router.get('/', (req, res, next) => {
   Article.find((err, articles) => {
     if (err) return next(err);
     res.render('index', {

@@ -1,0 +1,50 @@
+<%- include('../partials/header.ejs') %>
+<div class="ui container">
+  <%- include('../partials/menu.ejs')%>
+  <h2>Skills</h2>
+  <hr>
+  <h3>Add Skill</h3>
+  <div id="addSkillForm" class="ui form segment">
+    <div class="three fields">
+      <div class="field">
+        <div class="ui hidden divider"></div>
+        <div class="ui labeled input">
+          <a class="ui label">Subject</a>
+          <input type="text" required placeholder="Skill title...">
+        </div>
+      </div>
+      <div class="field">
+        <div class="ui hidden divider"></div>
+        <div class="ui labeled input">
+          <a class="ui label">Days</a>
+          <input type="text" required placeholder="Days to learn...">
+        </div>
+      </div>
+      <div class="field">
+        <div class="ui hidden divider"></div>
+        <div class="ui labeled input">
+          <a class="ui label">Color</a>
+          <input type="color" placeholder="Theme color...">
+        </div>
+      </div>
+    </div>
+    <div class="two fields">
+      <div class="field">
+        <div class="ui hidden divider"></div>
+        <label>Specific goals</label>
+        <textarea placeholder="Enter goals in point form, separated by commas i.e
+-Learn to C++,
+-Learn to Java,
+-Learn to C#,"></textarea>
+      </div>
+    </div>
+    <div class="ui hidden divider"></div>
+    <div class="field floated right">
+      <button type="submit" class="ui positive right labeled icon button">
+        Add <i class="add icon"></i>
+      </button>
+    </div>
+  </div>
+</div>
+
+<%-include('../partials/footer.ejs')%>

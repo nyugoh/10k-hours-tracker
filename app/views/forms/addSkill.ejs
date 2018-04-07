@@ -1,0 +1,20 @@
+<div class="ui standard modal" id="addSkillModal">
+  <i class="close icon"></i>
+  <div class="header">Add a new exciting skill</div>
+  <div action="/skills/add" method="post" class="ui form padded">
+    <div class="field required">
+      <input name="email" required placeholder="Email/username..." type="text">
+    </div>
+    <div class="field required">
+      <input required name="password" placeholder="Password here ..." type="password">
+    </div>
+  </div>
+  <div class="actions">
+    <button type="reset" class="ui black button">
+      Cancel
+    </button>
+    <button type="submit" class="ui positive right labeled icon button">
+      Add <i class="add icon"></i>
+    </button>
+  </div>
+</div>
