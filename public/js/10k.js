@@ -15,42 +15,7 @@ $(document).ready(() =>{
 
   $('.ui.dropdown').dropdown();
 
-  $('#addSkillForm').on('submit', e =>{
-    e.preventDefault();
-    debugger;
-    const form = e.target;
-    let skill = {};
-    for(let i=0;i<Object.keys(form).length;i++){
-      if(form[i] && form[i].name !== 'submit'){
-        // TODO:: Added check for required fields
-        skill[form[i].name] = form[i].value;
-      }
-    }
-    // TODO :: Use axios
-    $.ajax({
-      method: 'post',
-      url: '/skills/add',
-      data: skill,
-      success: (data, status, message) =>{
-        if(data.status) {
-          $("#addSkillForm").get(0).reset();
-          $('#successMessage').html('<div class="ui hidden divider"></div>\n' +
-            '  <div class="ui message info">\n' +
-            '    <div class="header">Success... !!</div>\n' +
-            '    <p>Skill added successfully.</p>\n' +
-            '  </div>');
-          reloadSkills();
-        }
-      },
-      error: (error) => {
-        $('#errorMessage').html('<div class="ui hidden divider"></div>\n' +
-          '  <div class="ui message error">\n' +
-          '    <div class="header">Error... !!</div>\n' +
-          '    <p>error.</p>\n' +
-          '  </div>');
-      }
-    })
-  });
+  $('#addSkillForm').on('submit', e => addSkill(e));
 
 });
 // Functions
@@ -59,7 +24,8 @@ function reloadSkills() {
     method: 'get',
     url: '/skills/list',
     success: (data) =>{
-      console.log(data)
+      $('#skillsTable').text('');
+      populateSkills(data.skills);
     },
     error: (error) =>{
       console.log(error);
@@ -76,7 +42,7 @@ function populateSkills(skills) {
       let lastActivity = new Date(skill.updatedAt);
       table.append('<tr id="'+skill._id+'">\n' +
         '            <td>'+subject+'</td>\n' +
-        '            <td>'+lastActivity+'</td>\n' +
+        '            <td>'+lastActivity.toLocaleDateString()+'</td>\n' +
         '            <td>\n' +
         '              <div class="ui basic progress success" data-percent="52">\n' +
         '                <div class="bar" style="transition-duration: 300ms; width: 52%;">\n' +
@@ -111,15 +77,12 @@ function populateSkills(skills) {
         '          </tr>')
     });
   } else {
-    table.html("<h3>No Skills yet</h3>");
+    table.html("<tr><td colspan='6' class='padded centered info'><h3>No Skills yet</h3></td></tr>");
   }
 }
 
-
-// FORMS
-$('#addSkillForm').on('submit', e =>{
+function addSkill(e) {
   e.preventDefault();
-  debugger;
   const form = e.target;
   let skill = {};
   for(let i=0;i<Object.keys(form).length;i++){
@@ -152,4 +115,4 @@ $('#addSkillForm').on('submit', e =>{
         '  </div>');
     }
   })
-});
+}
