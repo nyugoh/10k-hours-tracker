@@ -40,9 +40,15 @@ function populateSkills(skills) {
       console.log(skill);
       let subject = skill.subject.toUpperCase();
       let lastActivity = new Date(skill.updatedAt);
+      let milestones;
+      if (skill.milestones) {
+        milestones = '';
+      } else {
+        milestones = 'NONE';
+      }
       table.append('<tr id="'+skill._id+'">\n' +
         '            <td>'+subject+'</td>\n' +
-        '            <td>'+lastActivity.toLocaleDateString()+'</td>\n' +
+        '            <td>'+lastActivity.toLocaleDateString() + lastActivity.toLocaleTimeString() +'</td>\n' +
         '            <td>\n' +
         '              <div class="ui basic progress success" data-percent="52">\n' +
         '                <div class="bar" style="transition-duration: 300ms; width: 52%;">\n' +
@@ -54,16 +60,11 @@ function populateSkills(skills) {
         '            <td>'+skill.hours+' hours</td>\n' +
         '            <td>\n' +
         '              <ul class="ui list" style="list-style: none;">\n' +
-        '                <li class="item">\n' +
-        '                  <i class="icon checkmark"></i> Login with passport\n' +
-        '                </li>\n' +
-        '                <li class="item">\n' +
-        '                  <i class="icon checkmark"></i> Login with OAth\n' +
-        '                </li>\n' +
+                        milestones+
         '              </ul>\n' +
         '            </td>\n' +
         '            <td class="text center">\n' +
-        '              <i class="icon trash red"></i>\n' +
+        '              <i onclick="removeSkill(\''+skill._id+'\');" class="icon trash red"></i>\n' +
         '              <div class="ui hidden divider"></div>\n' +
         '              <i class="icon pencil blue"></i>\n' +
         '              <div class="ui hidden divider"></div>\n' +
@@ -115,4 +116,19 @@ function addSkill(e) {
         '  </div>');
     }
   })
+}
+
+function removeSkill(id) {
+  $.ajax({
+    method: 'post',
+    url: '/skills/remove',
+    data: {id: id},
+    success: () =>{
+      reloadSkills();
+    },
+    error: (error) =>{
+      // TODO :: Show success message and error
+      console.log(error);
+    }
+  });
 }

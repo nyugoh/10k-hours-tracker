@@ -42,3 +42,12 @@ router.get('/list', (req, res) =>{
     res.status(404).json({message: error.message});
   });
 });
+
+router.post('/remove', (req, res) =>{
+  Skill.findByIdAndRemove(req.body.id).then(status=>{
+    if (status)
+      res.json({status: 'OK'});
+  }).catch(error=>{
+    res.status(404).json({message: error.message});
+  });
+});
