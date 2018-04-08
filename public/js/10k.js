@@ -3,7 +3,11 @@
  */
 
 // GLOBAL VARIABLES
-var paused = false;
+let hour, minute, second;
+let date, hours=0, minutes=0, seconds=0;
+let paused = false;
+let isCounting = false;
+let counter;
 $(document).ready(() =>{
   $('#addSkillModal').modal('attach events', '#addSkillButton');
 
@@ -20,7 +24,10 @@ $(document).ready(() =>{
 
   $('#addSkillForm').on('submit', e => addSkill(e));
 
-  showTimer();
+  // showTimer();
+  hour = $('#hoursDown');
+  minute = $('#minutesDown');
+  second = $('#secondsDown');
 
 });
 // Functions
@@ -155,30 +162,12 @@ function showTimer() {
 }
 
 function startTimer() {
-  buttonsControl(true, false, false, false);
-  let hour = $('#hoursDown');
-  let minute = $('#minutesDown');
-  let second = $('#secondsDown');
-  let date, hours=0, minutes=0, seconds=0;
-  setInterval(() =>{
-    date = new Date();
-    seconds ++;
-    if(seconds>59){
-      minutes = Math.floor(seconds/60);
-    }
-    if(minutes>59){
-      hours = Math.floor(minutes/60);
-    }
-    if(hours < 10)
-      hours = parseInt(hours)===0? '00': '0'+hours;
-    if(minutes < 10)
-      minutes = parseInt(minutes)===0? '00': '0'+minutes;
-    hour.text(hours);
-    minute.text(minutes);
-    let showSeconds = '0'+Math.floor(seconds%60);
-    console.log(showSeconds.substr(-2))
-    second.text(showSeconds.substr(-2));
-  }, 1000);
+  isCounting = !isCounting;
+  counter = setInterval( start, 1000);
+  if(isCounting) {
+    buttonsControl(true, false, false, false);
+    start();
+  }
 }
 
 function pauseTimer() {
@@ -204,19 +193,23 @@ function buttonsControl(start, pause, reset, stop) {
     pauseBtn.removeAttr('disabled');
     resetBtn.removeAttr('disabled');
     stopBtn.removeAttr('disabled');
+  } else {
+    isCounting = false;
   }
 
   if(pause){ // disable start and stop enable reset
     if(paused){
       startBtn.attr('disabled', '');
       pauseBtn.html('<i class="icon play"></i> PLAY');
-      resetBtn.removeAttr('disabled');
+      resetBtn.attr('disabled', '');
       stopBtn.attr('disabled', '');
+      clearInterval(counter);
     } else {
       startBtn.attr('disabled', '');
       pauseBtn.html('<i class="icon pause"></i> PAUSE');
       resetBtn.removeAttr('disabled');
       stopBtn.removeAttr('disabled');
+      startTimer();
     }
   }
 
@@ -225,6 +218,11 @@ function buttonsControl(start, pause, reset, stop) {
     pauseBtn.attr('disabled', '');
     resetBtn.attr('disabled', '');
     stopBtn.attr('disabled', '');
+    clearInterval(counter);
+    seconds = 0;
+    hour.text('00');
+    minute.text('00');
+    second.text('00');
   }
 
   if(stop) { // disable all except start
@@ -232,5 +230,26 @@ function buttonsControl(start, pause, reset, stop) {
     pauseBtn.attr('disabled', '');
     resetBtn.attr('disabled', '');
     stopBtn.attr('disabled', '');
+    clearInterval(counter);
   }
+}
+
+function start(){
+  let showSeconds = '0'+Math.floor(seconds%60);
+  date = new Date();
+  seconds ++;
+  if(seconds>59){
+    minutes = Math.floor(seconds/60);
+  }
+  if(minutes>59){
+    hours = Math.floor(minutes/60);
+  }
+  if(hours < 10)
+    hours = parseInt(hours)===0? '00': '0'+hours;
+  if(minutes < 10)
+    minutes = parseInt(minutes)===0? '00': '0'+minutes;
+
+  hour.text(hours);
+  minute.text(minutes);
+  second.text(showSeconds.substr(-2));
 }
