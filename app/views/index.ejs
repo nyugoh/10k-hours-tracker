@@ -6,7 +6,25 @@
   <p>Welcome to <%-appName%></p>
   <a href="/signin">Sign in</a>
   <a href="/signup">Sign up</a>
-
+  <div class="ui segment">
+    <div class="ui statistics">
+      <div class="statistic">
+        <div class="value" id="hours">22</div>
+      </div>
+      <div class="statistic">
+        <div class="value">:</div>
+      </div>
+      <div class="statistic">
+        <div class="value" id="minutes">30</div>
+      </div>
+      <div class="statistic">
+        <div class="value">:</div>
+      </div>
+      <div class="statistic">
+        <div class="value" id="seconds">15</div>
+      </div>
+    </div>
+  </div>
 </div>
 <%- include('./forms/addSkill.ejs') %>
 <%- include('./partials/footer.ejs') %>

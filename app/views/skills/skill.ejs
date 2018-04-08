@@ -3,27 +3,69 @@
   <%- include('../partials/menu.ejs')%>
   <div class="ui hidden divider"></div>
   <h2 id="subject"></h2>
-  <hr>
+  <div class="ui divider"></div>
   <div class="ui grid">
-    <div class="two column row">
-      <div class="ui two column">
-        <div class="ui column segment">
-          <h4 class="header">Click here to start counter</h4>
-          <button class="ui button green massive">
+    <div class="row">
+      <div class="twelve wide column">
+        <div class="ui column segment center aligned">
+          <div class="ui statistics" style="display: inline;">
+            <div class="statistic">
+              <div class="label">HOURS</div>
+              <div class="value" id="hoursDown">00</div>
+            </div>
+            <div class="statistic">
+              <div class="label"></div>
+              <div class="value">:</div>
+            </div>
+            <div class="statistic">
+              <div class="label">MINUTES</div>
+              <div class="value" id="minutesDown">00</div>
+            </div>
+            <div class="statistic">
+              <div class="label"></div>
+              <div class="value">:</div>
+            </div>
+            <div class="statistic">
+              <div class="label">SECONDS</div>
+              <div class="value" id="secondsDown">00</div>
+            </div>
+          </div>
+        </div>
+        <div class="ui hidden divider"></div>
+        <div class="ui column segment center aligned">
+          <button class="ui button green massive" id="startButton" onclick="startTimer()">
             <i class="icon stopwatch"></i> START
           </button>
-        </div>
-        <hr>
-        <div class="ui column segment">
-          <h4 class="header">Click here to stop counter</h4>
-          <button class="ui button massive orange" disabled>
+          <button class="ui button blue massive" disabled id="pauseButton" onclick="pauseTimer()">
+            <i class="icon pause"></i> PAUSE
+          </button>
+          <button class="ui button red massive" disabled id="resetButton" onclick="resetTimer()">
+            <i class="icon stop"></i> RESET
+          </button>
+          <button class="ui button massive orange" id="stopButton" disabled onclick="stopTimer()">
             <i class="icon hourglass"></i> STOP
           </button>
         </div>
       </div>
-      <div class="ui column">
-        <div class="ui hidden divider"></div>
+      <div class="four wide column">
         Progress bar here
+        <div class="ui statistics" style="display: none; margin: 20px 20px;">
+          <div class="statistic">
+            <div class="value" id="hours">22</div>
+          </div>
+          <div class="statistic">
+            <div class="value">:</div>
+          </div>
+          <div class="statistic">
+            <div class="value" id="minutes">30</div>
+          </div>
+          <div class="statistic">
+            <div class="value">:</div>
+          </div>
+          <div class="statistic">
+            <div class="value" id="seconds">15</div>
+          </div>
+        </div>
       </div>
     </div>
   </div>

@@ -1,6 +1,9 @@
 /*
 * Main javascript file
  */
+
+// GLOBAL VARIABLES
+var paused = false;
 $(document).ready(() =>{
   $('#addSkillModal').modal('attach events', '#addSkillButton');
 
@@ -16,6 +19,8 @@ $(document).ready(() =>{
   $('.ui.dropdown').dropdown();
 
   $('#addSkillForm').on('submit', e => addSkill(e));
+
+  showTimer();
 
 });
 // Functions
@@ -125,4 +130,107 @@ function removeSkill(id) {
       console.log(error);
     }
   });
+}
+
+function showTimer() {
+  let hour = $('#hours');
+  let minute = $('#minutes');
+  let second = $('#seconds');
+  let date, hours, minutes, seconds;
+  setInterval(() =>{
+    date = new Date();
+    hours = date.getHours();
+    minutes = date.getMinutes();
+    seconds = date.getSeconds();
+    if(hours < 10)
+      hours = '0' +hours;
+    if(minutes < 10)
+      minutes = '0' + minutes;
+    if(seconds < 10)
+      seconds = '0' + seconds;
+    hour.text(hours);
+    minute.text(minutes);
+    second.text(seconds);
+  }, 100);
+}
+
+function startTimer() {
+  buttonsControl(true, false, false, false);
+  let hour = $('#hoursDown');
+  let minute = $('#minutesDown');
+  let second = $('#secondsDown');
+  let date, hours=0, minutes=0, seconds=0;
+  setInterval(() =>{
+    date = new Date();
+    seconds ++;
+    if(seconds>59){
+      minutes = Math.floor(seconds/60);
+    }
+    if(minutes>59){
+      hours = Math.floor(minutes/60);
+    }
+    if(hours < 10)
+      hours = parseInt(hours)===0? '00': '0'+hours;
+    if(minutes < 10)
+      minutes = parseInt(minutes)===0? '00': '0'+minutes;
+    hour.text(hours);
+    minute.text(minutes);
+    let showSeconds = '0'+Math.floor(seconds%60);
+    console.log(showSeconds.substr(-2))
+    second.text(showSeconds.substr(-2));
+  }, 1000);
+}
+
+function pauseTimer() {
+  paused = !paused;
+  buttonsControl(false, true, false, false);
+}
+
+function resetTimer() {
+  buttonsControl(false, false, true, false);
+}
+
+function stopTimer() {
+  buttonsControl(false, false, false, true);
+}
+
+function buttonsControl(start, pause, reset, stop) {
+  let startBtn = $('#startButton');
+  let pauseBtn = $('#pauseButton');
+  let resetBtn = $('#resetButton');
+  let stopBtn = $('#stopButton');
+  if(start){ // disable start enable others
+    startBtn.attr('disabled', '');
+    pauseBtn.removeAttr('disabled');
+    resetBtn.removeAttr('disabled');
+    stopBtn.removeAttr('disabled');
+  }
+
+  if(pause){ // disable start and stop enable reset
+    if(paused){
+      startBtn.attr('disabled', '');
+      pauseBtn.html('<i class="icon play"></i> PLAY');
+      resetBtn.removeAttr('disabled');
+      stopBtn.attr('disabled', '');
+    } else {
+      startBtn.attr('disabled', '');
+      pauseBtn.html('<i class="icon pause"></i> PAUSE');
+      resetBtn.removeAttr('disabled');
+      stopBtn.removeAttr('disabled');
+    }
+  }
+
+  if(reset) { // disable all except start
+    startBtn.removeAttr('disabled');
+    pauseBtn.attr('disabled', '');
+    resetBtn.attr('disabled', '');
+    stopBtn.attr('disabled', '');
+  }
+
+  if(stop) { // disable all except start
+    startBtn.removeAttr('disabled');
+    pauseBtn.attr('disabled', '');
+    resetBtn.attr('disabled', '');
+    stopBtn.attr('disabled', '');
+  }
 }
